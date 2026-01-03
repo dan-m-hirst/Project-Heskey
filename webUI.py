@@ -4,8 +4,11 @@ import random
 import pandas as pd
 #need to run in terminal "streamlit run webUI.py"
 #random.shuffle to randomise list
-sponsor_list = list(pd.read_csv("Simulator Files/sponsors.csv", header = False))
+sponsor_list = pd.read_csv("Simulator Files/sponsors.csv", header = None)[0]
 sponsor = random.choice(sponsor_list)
+
+print(sponsor_list)
+print(sponsor)
 
 st.title(f"Patented Mike Dixon 4most Draw Simulator - brought to you by {sponsor}")
 st.write("Hello World!")
