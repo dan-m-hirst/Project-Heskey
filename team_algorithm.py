@@ -53,7 +53,7 @@ def get_team_combos(player_stats, size_dict, metric = "Avg Rating"):
                      "Team A Score": team_a_scores[optimal_teams_index],
                      "Team B Score": team_b_scores[optimal_teams_index]
                      }
-    print(f"Fairest teams caclulated. Average difference of {optimal_diff:.2f} in {metric}.")
+    print(f"Fairest teams calculated. Average difference of {optimal_diff:.2f} in {metric}.")
     return optimal_teams
 
 def print_team_combo_result(optimised_teams):
