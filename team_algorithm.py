@@ -72,6 +72,3 @@ def generate_fairest_teams(full_player_stats, players_playing, metric = "Avg Rat
     team_combos = get_team_combos(active_player_stats, team_sizes, metric)
     print_team_combo_result(team_combos)
     return team_combos
-
-
-result = generate_fairest_teams(all_player_stats, whos_playing)
