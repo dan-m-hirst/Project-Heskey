@@ -56,8 +56,22 @@ def get_team_combos(player_stats, size_dict, metric = "Avg Rating"):
     print(f"Fairest teams caclulated. Average difference of {optimal_diff:.2f} in {metric}.")
     return optimal_teams
 
+def print_team_combo_result(optimised_teams):
+    team_a_score = optimised_teams['Team A Score']
+    team_b_score = optimised_teams['Team B Score']
+    unfairness_metric = abs(team_a_score - team_b_score)
+    print("Team A:", optimised_teams['Team A'], f"Score: {team_a_score:.2f}")
+    print("Team B:", optimised_teams['Team B'], f"Score: {team_b_score:.2f}")
+    print(f"Unfairness score: {unfairness_metric:.2f}")
+
 size_dict = calc_team_sizes(player_stats)
 
-optimal_teams = get_team_combos(player_stats, size_dict, metric="Avg Rating")
-print("Team A:", optimal_teams['Team A'], f"Score: {optimal_teams['Team A Score']:.2f}")
-print("Team B:", optimal_teams['Team B'], f"Score: {optimal_teams['Team B Score']:.2f}")
+def generate_fairest_teams(full_player_stats, players_playing, metric = "Avg Rating"):
+    active_player_stats = full_player_stats[full_player_stats['Player'].isin(players_playing)]
+    team_sizes = calc_team_sizes(active_player_stats)
+    team_combos = get_team_combos(active_player_stats, team_sizes, metric)
+    print_team_combo_result(team_combos)
+    return team_combos
+
+
+result = generate_fairest_teams(all_player_stats, whos_playing)
