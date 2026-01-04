@@ -6,9 +6,9 @@ from team_algorithm import generate_fairest_teams
 #need to run in terminal "streamlit run webUI.py"
 #How/when do I put in the unfairness score?
 
-def get_teams(all_player_stats_path, players_playing_path):
+def get_teams(all_player_stats_path, players_playing):
     full_stats = pd.read_csv(all_player_stats_path)
-    active_players = pd.read_csv(players_playing_path, header = None)[0]
+    active_players = players_playing
 
     fairest_teams = generate_fairest_teams(full_stats, active_players)
 
@@ -31,7 +31,7 @@ while False:
     footy_unc_list = pd.read_csv("Simulator Files/uncs.csv", header = None)["Name"]
 
 
-# Get fairest teams and generate randomised sponsor for the draw
+# Get fairest teams
 randomised_teams = get_teams("Player Files/Player Stats.csv", "Player Files/Who is playing.csv")
 
 
@@ -55,6 +55,8 @@ st.write(f"{no_players} players set to play.")
 
 
 if st.button("Begin the festivities"):
+    # Get fairest teams
+    randomised_teams = get_teams("Player Files/Player Stats.csv", active_players)
     #we want to run all of our procedural dialogue and draw in here
     st.write("Button active")
     sleep(3)
