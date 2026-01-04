@@ -26,6 +26,7 @@ def get_team_df(teams_dict):
     team_a = list(teams_dict["Team A"])
     team_b = list(teams_dict["Team B"])
 
+    #Need to pad lists or else from_dict will fail
     if len(team_a) < len(team_b):
         team_a += ["Free spot"]*(len(team_b) - len(team_a))
     if len(team_a) > len(team_b):
@@ -54,7 +55,7 @@ while False:
 sponsor = get_sponsor()
 st.session_state["sponsor"] = sponsor
 st.title(f"Patented Mike Dixon 4most Draw Simulator - Brought to you by {sponsor}")
-st.title(100*"-")
+st.divider()
 st.write("Hello World!")
 
 st.set_page_config(layout="wide")
@@ -86,18 +87,17 @@ st.write(f"{no_players} players set to play.")
 
 
 if st.button("Begin the festivities"):
-    # Get fairest teams
+    # Get fairest teams in shuffled form.
     randomised_teams = get_teams("Player Files/Player Stats.csv", active_players)
     team_a_score = randomised_teams["Team A Score"]
     team_b_score = randomised_teams["Team B Score"]
-    #we want to run all of our procedural dialogue and draw in here
-    st.write("Button active")
-    sleep(3)
-    st.write("Delay test successful")
     teams_table = pd.DataFrame.from_dict(get_team_df(randomised_teams))
-    
+    #we want to run all of our procedural dialogue and draw in here
+    st.subheader("Draw HQ")
     draw_dialogue = st.empty()
+    st.divider()
 
+    #These cols are where the final team list will go
     col1, col2 = st.columns(2, width = col_width)
     with col1:
         st.subheader("Team A")
