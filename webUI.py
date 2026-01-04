@@ -31,10 +31,6 @@ while False:
     footy_unc_list = pd.read_csv("Simulator Files/uncs.csv", header = None)["Name"]
 
 
-# Get fairest teams
-randomised_teams = get_teams("Player Files/Player Stats.csv", "Player Files/Who is playing.csv")
-
-
 #######BEGIN WEBPAGE######
 sponsor = get_sponsor()
 st.session_state["sponsor"] = sponsor
