@@ -95,7 +95,9 @@ if st.button("Begin the festivities"):
     sleep(3)
     st.write("Delay test successful")
     teams_table = pd.DataFrame.from_dict(get_team_df(randomised_teams))
-        
+    
+    draw_dialogue = st.empty()
+
     col1, col2 = st.columns(2, width = col_width)
     with col1:
         st.subheader("Team A")
@@ -105,19 +107,26 @@ if st.button("Begin the festivities"):
     sleep(3)
     
     for x in teams_table.iterrows():
+        team_a_draw = x[1].iloc[0]
+        team_b_draw = x[1].iloc[1]
         with col1:
-            if x[1].iloc[0] != "Free spot": 
-                #call get_intro(x[1][0])
-                #call get_gif(x[1][0])
-                st.write(x[1].iloc[0])
+            if team_a_draw != "Free spot":
+                with draw_dialogue.container(): 
+                    #call get_intro(team_a_draw)
+                    #call get_gif(team_a_draw)
+                    st.write(team_a_draw)
+                st.write(team_a_draw)
                 sleep(3)
-            print(x[1].iloc[0])
         with col2:
-            if x[1].iloc[1] != "Free spot":
-                #call get_intro(x[1][1])
-                #call get_gif(x[1][1])
-                st.write(x[1].iloc[1])
+            if team_b_draw != "Free spot":
+                with draw_dialogue.container():
+                    #call get_intro(team_b_draw)
+                    #call get_gif(team_b_draw)
+                    st.write(team_b_draw)
+                st.write(team_b_draw)
                 sleep(3)
+
+
     
     st.write(f"Fairest teams generated. Team A score: {team_a_score:.2f}, Team B Score {team_b_score:.2f}.")
     st.write(f"Unfairness rating: {abs(team_a_score - team_b_score):.2f}.")
