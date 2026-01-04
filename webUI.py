@@ -5,6 +5,7 @@ import pandas as pd
 from team_algorithm import generate_fairest_teams
 #need to run in terminal "streamlit run webUI.py"
 #How/when do I put in the unfairness score?
+col_width = 600
 
 def get_teams(all_player_stats_path, players_playing):
     full_stats = pd.read_csv(all_player_stats_path)
@@ -60,7 +61,7 @@ st.set_page_config(layout="wide")
 
 active_players = []
 no_players = len(active_players)
-cola, colb, colc = st.columns(3)
+cola, colb, colc = st.columns(3, width = col_width)
 i=0
 #Generate checkboxes in columns
 for player in sorted(pd.read_csv("Player Files/Player Stats.csv")["Player"].tolist()):
@@ -95,7 +96,7 @@ if st.button("Begin the festivities"):
     st.write("Delay test successful")
     teams_table = pd.DataFrame.from_dict(get_team_df(randomised_teams))
         
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2, width = col_width)
     with col1:
         st.subheader("Team A")
     with col2:
@@ -114,7 +115,7 @@ if st.button("Begin the festivities"):
         with col2:
             if x[1].iloc[1] != "Free spot":
                 #call get_intro(x[1][1])
-                #call get_fig(x[1][1])
+                #call get_gif(x[1][1])
                 st.write(x[1].iloc[1])
                 sleep(3)
     
