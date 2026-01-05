@@ -59,6 +59,7 @@ def get_uncs():
 #######BEGIN WEBPAGE######
 sponsor = get_sponsor()
 st.session_state["sponsor"] = sponsor
+st.set_page_config(layout="wide")
 st.title(f"Patented Mike Dixon 4most Draw Simulator - Brought to you by {sponsor}")
 st.divider()
 st.subheader("Player and fairness metric select")
@@ -66,8 +67,6 @@ st.write()
 metric_choices = list(pd.read_csv("Player Files/Player Stats.csv").columns.values)
 metric_choices.remove("Player")
 fair_metric = st.selectbox("Select your fairness metric:", metric_choices, width = col_width)
-
-st.set_page_config(layout="wide")
 
 active_players = []
 no_players = len(active_players)
