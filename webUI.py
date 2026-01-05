@@ -70,12 +70,13 @@ st.write()
 
 fair_metric = st.selectbox("Select your fairness metric:", get_metric(), width = col_width)
 
+st.write("Select the participating players:")
+
 active_players = []
 no_players = len(active_players)
 cola, colb, colc = st.columns(3, width = col_width)
 i=0
 
-st.write("Select the participating players:")
 #Generate checkboxes in columns
 for player in sorted(pd.read_csv("Player Files/Player Stats.csv")["Player"].tolist()):
     i += 1 
