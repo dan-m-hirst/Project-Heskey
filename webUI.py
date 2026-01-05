@@ -53,7 +53,10 @@ def get_uncs():
     if footy_unc2["Surname"] == None: footy_unc1["Surname"] = footy_unc2["First Name"]
     return[footy_unc1, footy_unc2]
 
-
+def get_metric():
+    metric_choices = list(pd.read_csv("Player Files/Player Stats.csv").columns.values)
+    metric_choices.remove("Player")
+    return metric_choices
 
 
 #######BEGIN WEBPAGE######
@@ -64,9 +67,8 @@ st.title(f"Patented Mike Dixon 4most Draw Simulator - Brought to you by {sponsor
 st.divider()
 st.subheader("Player and fairness metric select")
 st.write()
-metric_choices = list(pd.read_csv("Player Files/Player Stats.csv").columns.values)
-metric_choices.remove("Player")
-fair_metric = st.selectbox("Select your fairness metric:", metric_choices, width = col_width)
+
+fair_metric = st.selectbox("Select your fairness metric:", get_metric(), width = col_width)
 
 active_players = []
 no_players = len(active_players)
