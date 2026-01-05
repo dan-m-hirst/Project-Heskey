@@ -37,7 +37,6 @@ def get_team_df(teams_dict):
     
     return(teams_table)
 
-
 def get_sponsor():
     if "sponsor" not in st.session_state:
         sponsor_list = pd.read_csv("Simulator Files/sponsors.csv", header = None)[0]
@@ -45,13 +44,16 @@ def get_sponsor():
         return(sponsor)
     return(st.session_state["sponsor"])
 
-while False:
-    #have basically dummied this as don't want to focus on procedural dialogue
-    #before draw table is done
-    footy_unc_list = pd.read_csv("Simulator Files/uncs.csv", header = None)["Name"]
-    footy_unc1 = random.choice(footy_unc_list)
-    footy_unc_list.remove(footy_unc1)
-    footy_unc2 = random.choice(footy_unc_list)
+def get_uncs():
+    footy_unc_list = pd.read_csv("Simulator Files/uncs.csv").sample(2).reindex()
+    footy_unc_list = footy_unc_list
+    footy_unc1 = footy_unc_list.iloc[0].to_dict()
+    if footy_unc1["Surname"] == None: footy_unc1["Surname"] = footy_unc1["First Name"]
+    footy_unc2 = footy_unc_list.iloc[1].to_dict()
+    if footy_unc2["Surname"] == None: footy_unc1["Surname"] = footy_unc2["First Name"]
+    return[footy_unc1, footy_unc2]
+
+
 
 
 #######BEGIN WEBPAGE######
@@ -95,10 +97,25 @@ if st.button("Begin the festivities"):
     team_a_score = randomised_teams["Team A Score"]
     team_b_score = randomised_teams["Team B Score"]
     teams_table = pd.DataFrame.from_dict(get_team_df(randomised_teams))
+
+    uncs = get_uncs()
+    unc1 = uncs[0]
+    unc2 = uncs[1]
+
     #we want to run all of our procedural dialogue and draw in here
     st.subheader("Draw HQ")
     draw_dialogue = st.empty()
     st.divider()
+
+    with draw_dialogue.container():
+        st.write(
+            f"""Welcome to this Leeds Office 5s draw everyone, 
+            and please put your hands together for our guest {unc1["Name"]}!"""
+            )
+        sleep(3)
+        st.write(f"How are things, Mr. {unc1['Surname']}?")
+        sleep(2)
+        st.write('"All good thanks, Mike. Let\'s get on with it shall we?"')
 
     #These cols are where the final team list will go
     col1, col2 = st.columns(2, width = col_width)
@@ -117,7 +134,7 @@ if st.button("Begin the festivities"):
                 with draw_dialogue.container(): 
                     #call get_intro(team_a_draw)
                     #call get_gif(team_a_draw)
-                    st.write(team_a_draw)
+                    st.write(f"{team_a_draw} joins Team A")
                 st.write(team_a_draw)
                 sleep(3)
         with col2:
@@ -125,7 +142,7 @@ if st.button("Begin the festivities"):
                 with draw_dialogue.container():
                     #call get_intro(team_b_draw)
                     #call get_gif(team_b_draw)
-                    st.write(team_b_draw)
+                    st.write(f"{team_b_draw} joins Team B")
                 st.write(team_b_draw)
                 sleep(3)
 
