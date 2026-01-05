@@ -7,11 +7,11 @@ from team_algorithm import generate_fairest_teams
 #How/when do I put in the unfairness score?
 col_width = 600
 
-def get_teams(all_player_stats_path, players_playing):
+def get_teams(all_player_stats_path, players_playing, metric):
     full_stats = pd.read_csv(all_player_stats_path)
     active_players = players_playing
 
-    fairest_teams = generate_fairest_teams(full_stats, active_players)
+    fairest_teams = generate_fairest_teams(full_stats, active_players, metric)
 
     team_a = list(fairest_teams["Team A"])
     random.shuffle(team_a)
@@ -61,7 +61,11 @@ sponsor = get_sponsor()
 st.session_state["sponsor"] = sponsor
 st.title(f"Patented Mike Dixon 4most Draw Simulator - Brought to you by {sponsor}")
 st.divider()
-st.write("Hello World!")
+st.subheader("Player and fairness metric select")
+st.write()
+metric_choices = list(pd.read_csv("Player Files/Player Stats.csv").columns.values)
+metric_choices.remove("Player")
+fair_metric = st.selectbox("Select your fairness metric:", metric_choices, width = col_width)
 
 st.set_page_config(layout="wide")
 
@@ -69,6 +73,8 @@ active_players = []
 no_players = len(active_players)
 cola, colb, colc = st.columns(3, width = col_width)
 i=0
+
+st.write("Select the participating players:")
 #Generate checkboxes in columns
 for player in sorted(pd.read_csv("Player Files/Player Stats.csv")["Player"].tolist()):
     i += 1 
@@ -93,7 +99,7 @@ st.write(f"{no_players} players set to play.")
 
 if st.button("Begin the festivities"):
     # Get fairest teams in shuffled form.
-    randomised_teams = get_teams("Player Files/Player Stats.csv", active_players)
+    randomised_teams = get_teams("Player Files/Player Stats.csv", active_players, fair_metric)
     team_a_score = randomised_teams["Team A Score"]
     team_b_score = randomised_teams["Team B Score"]
     teams_table = pd.DataFrame.from_dict(get_team_df(randomised_teams))
@@ -132,7 +138,7 @@ if st.button("Begin the festivities"):
         with col1:
             if team_a_draw != "Free spot":
                 with draw_dialogue.container(): 
-                    #call get_intro(team_a_draw)
+                    #call get_intro(team_a_draw) #st.image() for gif
                     #call get_gif(team_a_draw)
                     st.write(f"{team_a_draw} joins Team A")
                 st.write(team_a_draw)
