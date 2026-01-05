@@ -49,6 +49,9 @@ while False:
     #have basically dummied this as don't want to focus on procedural dialogue
     #before draw table is done
     footy_unc_list = pd.read_csv("Simulator Files/uncs.csv", header = None)["Name"]
+    footy_unc1 = random.choice(footy_unc_list)
+    footy_unc_list.remove(footy_unc1)
+    footy_unc2 = random.choice(footy_unc_list)
 
 
 #######BEGIN WEBPAGE######
