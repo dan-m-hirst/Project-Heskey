@@ -64,6 +64,14 @@ def get_metric():
     metric_choices.remove("Player")
     return metric_choices
 
+def select_all():
+    for player in list_of_players:
+        st.session_state[f"{player}_check"] = True
+
+def deselect_all():
+    for player in list_of_players:
+        st.session_state[f"{player}_check"] = False
+
 
 #######BEGIN WEBPAGE######
 sponsor = get_sponsor()
@@ -77,6 +85,11 @@ st.write()
 fair_metric = st.selectbox("Select your fairness metric:", get_metric(), width = col_width)
 
 st.write("Select the participating players:")
+col1, col2 = st.columns(2, width = col_width//2)
+with col1:
+    st.button("Select all", on_click = select_all)
+with col2:
+    st.button("Deselect all", on_click = deselect_all)
 
 active_players = []
 no_players = len(active_players)
@@ -84,23 +97,25 @@ cola, colb, colc = st.columns(3, width = col_width)
 i=0
 
 #Generate checkboxes in columns
-for player in sorted(pd.read_csv(player_stats_path)["Player"].tolist()):
+list_of_players = sorted(pd.read_csv(player_stats_path)["Player"].tolist())
+for player in list_of_players:
     i += 1 
     if i <= 6:
         with cola:
-            if st.checkbox(f"{player}"):
+            if st.checkbox(f"{player}",key=f"{player}_check"):
                 active_players.append(player)
                 no_players = len(active_players)
     elif i <= 12:
         with colb:
-            if st.checkbox(f"{player}"):
+            if st.checkbox(f"{player}",key=f"{player}_check"):
                 active_players.append(player)
                 no_players = len(active_players)
     else:
         with colc:
-            if st.checkbox(f"{player}"):
+            if st.checkbox(f"{player}",key=f"{player}_check"):
                 active_players.append(player)
                 no_players = len(active_players)
+
 
 st.write(f"{no_players} players set to play.")
 
