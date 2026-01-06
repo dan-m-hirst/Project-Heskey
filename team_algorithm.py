@@ -4,25 +4,10 @@
 import pandas as pd
 import itertools as it
 
-all_player_stats = pd.read_csv('Player Files/Player Stats.csv')
 
-whos_playing = ['Mike',
-                'James K',
-                'Jamie',
-                'Jacob',
-                'Toby',
-                'Olly',
-                'Dan H',
-                'Steven',
-                'Callum',
-                'Rory',
-                'Mark'
-                ]
-
-player_stats = all_player_stats[all_player_stats['Player'].isin(whos_playing)]
-
-def calc_avg_score(player_list, metric="Avg Rating"):
-    return all_player_stats[all_player_stats['Player'].isin(player_list)][metric].mean()
+def calc_avg_score(full_player_stats, player_stats, metric = "Avg Rating"):
+    print(full_player_stats["Player"].isin(player_stats))
+    return full_player_stats.loc[full_player_stats["Player"].isin(player_stats)][metric].mean()
 
 def calc_team_sizes(player_stats):
     num_players = len(player_stats)
@@ -31,19 +16,18 @@ def calc_team_sizes(player_stats):
     return {"Team A": team_a_size, "Team B": team_b_size}
 
 
-def get_team_combos(player_stats, size_dict, metric = "Avg Rating"):
+def get_team_combos(full_player_stats, player_stats, size_dict, metric = "Avg Rating"):
     team_a_combo_list = []
     team_b_combo_list = []
     players = player_stats['Player'].tolist()
     team_a_size = size_dict['Team A']
-    team_b_size = size_dict['Team B']
     
-    for team_a_combos in list(it.combinations(players, team_a_size)):
+    for team_a_combos in it.combinations(players, team_a_size):
         team_a_combo_list.append(team_a_combos)
         team_b_combo_list.append([player for player in players if player not in team_a_combos])
     
-    team_a_scores = [calc_avg_score(team, metric) for team in team_a_combo_list]
-    team_b_scores = [calc_avg_score(team, metric) for team in team_b_combo_list]
+    team_a_scores = [calc_avg_score(full_player_stats, team, metric) for team in team_a_combo_list]
+    team_b_scores = [calc_avg_score(full_player_stats, team, metric) for team in team_b_combo_list]
     score_diffs = [abs(a - b) for a, b in zip(team_a_scores, team_b_scores)]
     optimal_diff = min(score_diffs)
     optimal_teams_index = score_diffs.index(optimal_diff)
@@ -64,11 +48,10 @@ def print_team_combo_result(optimised_teams):
     print("Team B:", optimised_teams['Team B'], f"Score: {team_b_score:.2f}")
     print(f"Unfairness score: {unfairness_metric:.2f}")
 
-size_dict = calc_team_sizes(player_stats)
 
 def generate_fairest_teams(full_player_stats, players_playing, metric = "Avg Rating"):
     active_player_stats = full_player_stats[full_player_stats['Player'].isin(players_playing)]
     team_sizes = calc_team_sizes(active_player_stats)
-    team_combos = get_team_combos(active_player_stats, team_sizes, metric)
+    team_combos = get_team_combos(full_player_stats, active_player_stats, team_sizes, metric)
     print_team_combo_result(team_combos)
     return team_combos
