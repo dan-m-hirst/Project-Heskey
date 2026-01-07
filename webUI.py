@@ -190,9 +190,3 @@ if st.button("Begin the festivities"):
 
     st.write(f"Fairest teams generated. Team A score: {team_a_score:.2f}, Team B Score {team_b_score:.2f}.")
     st.write(f"Unfairness rating: {abs(team_a_score - team_b_score):.2f}.")
-
-    # with st.empty():
-    #     st.write("this container is used for")
-    #     sleep(3)
-    #     st.write("overwriting text instead of simply printing downwards")
-    # pass
