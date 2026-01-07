@@ -140,18 +140,18 @@ if st.button("Begin the festivities"):
 
     with draw_dialogue_no_overwrite:
         st.write("Welcome to this Leeds Office 5s draw everyone.")
-        sleep(3)
+        sleep(4)
         call_guest_intro(unc1)  
-        sleep(3)
+        sleep(4)
         st.write(f"How are things, Mr. {unc1['Surname']}?")
-        sleep(3)
+        sleep(4)
         call_guest_banter(unc1)
-        sleep(2)
+        sleep(4)
         st.write(
             '''"No but seriously, I\'m all good thanks, Mike. 
             Let\'s get on with it shall we?"'''
         )
-        sleep(3)
+        sleep(4)
         st.write(f"Please, {unc1['First Name']}, start the draw!")
 
     #These cols are where the final team list will go
