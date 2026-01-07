@@ -14,11 +14,12 @@ def call_intro(player):
     player_first_name = player.split(" ")[0]
     player_second_name = player.split(" ")[1]
     titles =[
+        player,
         player_first_name,
         f"Mr. {player_second_name}",
         f"Young {player_first_name}",
         f"Big {player_first_name}",
-        f"the GOAT {player_second_name}"
+        f"the GOAT, {player_second_name}"
     ]
     chosen_title = random.choice(titles)
     dialogue = str(dialogue_file.sample(1)).replace("[Player]",chosen_title)
