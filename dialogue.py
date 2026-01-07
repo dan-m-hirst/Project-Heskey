@@ -35,7 +35,7 @@ def show_gif(player):
         player_gif_folder + "/" + random.choice(os.listdir(player_gif_folder))
     )
     print(gif)
-    return(st.image(gif))
+    return(st.image(gif,width = 500))
 
 def introduce_player(player):
     call_intro(player)

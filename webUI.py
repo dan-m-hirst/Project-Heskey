@@ -167,14 +167,18 @@ if st.button("Begin the festivities"):
                     introduce_player(team_a_draw)
                     st.write(f"{team_a_draw} joins Team A")
                 st.write(team_a_draw)
-                sleep(3)
+                sleep(5)
         with col2:
             if team_b_draw != "Free spot":
                 with draw_dialogue.container():
                     introduce_player(team_b_draw)
                     st.write(f"{team_b_draw} joins Team B")
                 st.write(team_b_draw)
-                sleep(3)
+                sleep(5)
+    
+    with draw_dialogue.container():
+        st.write('"That\'s all the teams picked folks, thanks for having me.')
+        st.write(f"No problem, {unc1["First Name"]}. You did fantastically.")
 
     st.write(f"Fairest teams generated. Team A score: {team_a_score:.2f}, Team B Score {team_b_score:.2f}.")
     st.write(f"Unfairness rating: {abs(team_a_score - team_b_score):.2f}.")
