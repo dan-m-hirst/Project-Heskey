@@ -138,7 +138,7 @@ if st.button("Begin the festivities"):
     st.divider()
 
     with draw_dialogue.container():
-        st.write(f"Welcome to this Leeds Office 5s draw everyone."))
+        st.write(f"Welcome to this Leeds Office 5s draw everyone.")
         sleep(3)
         #and please put your hands together for our guest {unc1["Name"]}!"""
         call_guest_intro(unc1)  
