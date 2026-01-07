@@ -4,7 +4,7 @@ import random
 import os
 import pandas as pd
 from team_algorithm import generate_fairest_teams
-from dialogue import call_intro, show_gif, call_guest_banter, call_guest_intro
+from dialogue import introduce_player, call_guest_banter, call_guest_intro
 #need to run in terminal "streamlit run webUI.py"
 #How/when do I put in the unfairness score?
 col_width = 600
@@ -140,7 +140,6 @@ if st.button("Begin the festivities"):
     with draw_dialogue.container():
         st.write(f"Welcome to this Leeds Office 5s draw everyone.")
         sleep(3)
-        #and please put your hands together for our guest {unc1["Name"]}!"""
         call_guest_intro(unc1)  
         st.write(f"How are things, Mr. {unc1['Surname']}?")
         call_guest_banter(unc1)
@@ -162,16 +161,14 @@ if st.button("Begin the festivities"):
         with col1:
             if team_a_draw != "Free spot":
                 with draw_dialogue.container(): 
-                    call_intro(team_a_draw)
-                    show_gif(team_a_draw)
+                    introduce_player(team_a_draw)
                     st.write(f"{team_a_draw} joins Team A")
                 st.write(team_a_draw)
                 sleep(3)
         with col2:
             if team_b_draw != "Free spot":
                 with draw_dialogue.container():
-                    call_intro(team_a_draw)
-                    show_gif(team_a_draw)
+                    introduce_player(team_b_draw)
                     st.write(f"{team_b_draw} joins Team B")
                 st.write(team_b_draw)
                 sleep(3)

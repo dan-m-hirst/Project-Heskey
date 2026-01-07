@@ -11,7 +11,7 @@ banter_file = pd.read_csv(banter_file_path, header = None)
 
 gif_folder = os.path.join(sim_folder, "GIFs")
 
-dialogue_file = pd.read_csv(dialogue_file_path, header = None)
+dialogue_file = pd.read_csv(dialogue_file_path)
 
 
 def call_intro(player):
@@ -21,18 +21,25 @@ def call_intro(player):
         player,
         player_first_name,
         f"Mr. {player_second_name}",
-        f"Young {player_first_name}",
-        f"Big {player_first_name}",
-        f"the GOAT, {player_second_name}"
+        f"Young {player}",
+        f"Big {player}",
+        f"the GOAT, {player}"
     ]
     chosen_title = random.choice(titles)
-    dialogue = str(dialogue_file.sample(1)).replace("[Player]",chosen_title)
-    return(dialogue)
+    dialogue = random.choice(dialogue_file["Dialogue"]).replace("[Player]",chosen_title)
+    return(st.write('"' + dialogue + '"'))
 
 def show_gif(player):
     player_gif_folder = os.path.join(gif_folder,player)
-    gif = random.choice(os.listdir(player_gif_folder))
+    gif = (
+        player_gif_folder + "/" + random.choice(os.listdir(player_gif_folder))
+    )
+    print(gif)
     return(st.image(gif))
+
+def introduce_player(player):
+    call_intro(player)
+    show_gif(player)
 
 def call_guest_banter(guest):
     guest_first_name = guest["First Name"]
@@ -40,4 +47,4 @@ def call_guest_banter(guest):
     pass
 
 def call_guest_intro(guest):
-    pass
+    return(st.write(f"Please put your hands together for our guest {guest["Name"]}!"))
