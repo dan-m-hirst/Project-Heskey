@@ -16,14 +16,16 @@ player_dialogue_file = pd.read_csv(player_dialogue_file_path)
 
 def call_intro(player):
     player_first_name = player.split(" ")[0]
-    player_second_name = player.split(" ")[1]
+    #player_second_name = player.split(" ")[1]
     titles =[
         player,
         player_first_name,
-        f"Mr. {player_second_name}",
         f"Young {player}",
         f"Big {player}",
-        f"the GOAT, {player}"
+        f"the GOAT, {player}",
+        f"the notorious {player}",
+        f"{player}, of ASFSE fame",
+        f"one of the players of all time, {player}"
     ]
     chosen_title = random.choice(titles)
     dialogue = random.choice(player_dialogue_file["Dialogue"]).replace("[Player]",chosen_title)
