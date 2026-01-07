@@ -138,13 +138,16 @@ if st.button("Begin the festivities"):
     st.divider()
 
     with draw_dialogue.container():
-        st.write(f"Welcome to this Leeds Office 5s draw everyone.")
+        st.write("Welcome to this Leeds Office 5s draw everyone.")
         sleep(3)
         call_guest_intro(unc1)  
         st.write(f"How are things, Mr. {unc1['Surname']}?")
         call_guest_banter(unc1)
         sleep(2)
-        st.write('"All good thanks, Mike. Let\'s get on with it shall we?"')
+        st.write(
+            '''"No but seriously, I\'m all good thanks, Mike. 
+            Let\'s get on with it shall we?"'''
+        )
 
     #These cols are where the final team list will go
     col1, col2 = st.columns(2, width = col_width)
