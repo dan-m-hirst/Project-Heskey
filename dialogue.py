@@ -42,9 +42,10 @@ def introduce_player(player):
 
 def call_guest_banter(guest):
     #need to randomise
-    st.write('"Haha, screw you too, Buddy."')
-    pass
+    #st.write('"Haha, screw you too, Buddy."')
+    return(st.write('"Haha, screw you too, Buddy."'))
 
 def call_guest_intro(guest):
     #need to randomise?
+    #return(st.write(f"Please put your hands together for our guest {guest["Name"]}!"))
     return(st.write(f"Please put your hands together for our guest {guest["Name"]}!"))

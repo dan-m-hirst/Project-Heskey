@@ -134,14 +134,17 @@ if st.button("Begin the festivities"):
 
     #we want to run all of our procedural dialogue and draw in here
     st.subheader("Draw HQ")
+    draw_dialogue_no_overwrite = st.container()
     draw_dialogue = st.empty()
     st.divider()
 
-    with draw_dialogue.container():
+    with draw_dialogue_no_overwrite:
         st.write("Welcome to this Leeds Office 5s draw everyone.")
         sleep(3)
         call_guest_intro(unc1)  
+        sleep(3)
         st.write(f"How are things, Mr. {unc1['Surname']}?")
+        sleep(3)
         call_guest_banter(unc1)
         sleep(2)
         st.write(
