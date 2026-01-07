@@ -42,9 +42,10 @@ def introduce_player(player):
     show_gif(player)
 
 def call_guest_banter(guest):
-    guest_first_name = guest["First Name"]
-    guest_surname = guest["Surname"]
+    #need to randomise
+    st.write('"Haha, screw you too, Buddy."')
     pass
 
 def call_guest_intro(guest):
+    #need to randomise?
     return(st.write(f"Please put your hands together for our guest {guest["Name"]}!"))
