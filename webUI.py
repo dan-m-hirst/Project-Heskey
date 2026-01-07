@@ -7,7 +7,7 @@ from team_algorithm import generate_fairest_teams
 from dialogue import introduce_player, call_guest_banter, call_guest_intro
 #need to run in terminal "streamlit run webUI.py"
 #How/when do I put in the unfairness score?
-col_width = 600
+col_width = 900
 core_folder = os.getcwd()
 player_stats_path = os.path.join(core_folder, "Player Files","Player Stats.csv")
 sim_folder = os.path.join(core_folder, "Simulator Files")
@@ -55,9 +55,9 @@ def get_uncs():
     footy_unc_list = pd.read_csv(unc_path).sample(2).reindex()
     footy_unc_list = footy_unc_list
     footy_unc1 = footy_unc_list.iloc[0].to_dict()
-    if footy_unc1["Surname"] == None: footy_unc1["Surname"] = footy_unc1["First Name"]
+    if footy_unc1["Surname"] == "nan": footy_unc1["Surname"] = footy_unc1["First Name"]
     footy_unc2 = footy_unc_list.iloc[1].to_dict()
-    if footy_unc2["Surname"] == None: footy_unc1["Surname"] = footy_unc2["First Name"]
+    if footy_unc2["Surname"] == "nan": footy_unc1["Surname"] = footy_unc2["First Name"]
     return[footy_unc1, footy_unc2]
 
 def get_metric():

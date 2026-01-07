@@ -1,2 +1,4 @@
+#.streamlit/config.toml
 [theme]
-baseFontSize = 22 #default is 16px
+base = "dark"
+baseFontSize = 20 # default is 16px
