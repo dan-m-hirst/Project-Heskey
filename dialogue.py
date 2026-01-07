@@ -5,10 +5,14 @@ import pandas as pd
 
 core_folder = os.getcwd()
 sim_folder = os.path.join(core_folder, "Simulator Files")
-dialogue_file_path = os.path.join(sim_folder, "dialogue.csv")
+dialogue_file_path = os.path.join(sim_folder, "player_dialogue.csv")
+banter_file_path = os.path.join(sim_folder, "guest_dialogue.csv")
+banter_file = pd.read_csv(banter_file_path, header = None)
+
 gif_folder = os.path.join(sim_folder, "GIFs")
 
 dialogue_file = pd.read_csv(dialogue_file_path, header = None)
+
 
 def call_intro(player):
     player_first_name = player.split(" ")[0]
@@ -29,3 +33,11 @@ def show_gif(player):
     player_gif_folder = os.path.join(gif_folder,player)
     gif = random.choice(os.listdir(player_gif_folder))
     return(st.image(gif))
+
+def call_guest_banter(guest):
+    guest_first_name = guest["First Name"]
+    guest_surname = guest["Surname"]
+    pass
+
+def call_guest_intro(guest):
+    pass
