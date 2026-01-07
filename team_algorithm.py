@@ -6,7 +6,6 @@ import itertools as it
 
 
 def calc_avg_score(full_player_stats, player_stats, metric = "Avg Rating"):
-    print(full_player_stats["Player"].isin(player_stats))
     return full_player_stats.loc[full_player_stats["Player"].isin(player_stats)][metric].mean()
 
 def calc_team_sizes(player_stats):
