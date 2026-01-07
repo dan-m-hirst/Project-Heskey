@@ -24,7 +24,7 @@ def call_intro(player):
         f"Big {player}",
         f"the GOAT, {player}",
         f"the notorious {player}",
-        f"{player}, of ASFSE fame",
+        f"{player} of ASFSE fame",
         f"one of the players of all time, {player}"
     ]
     chosen_title = random.choice(titles)
