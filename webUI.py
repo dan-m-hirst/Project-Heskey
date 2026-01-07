@@ -181,8 +181,11 @@ if st.button("Begin the festivities"):
                 st.write(team_b_draw)
                 sleep(5)
     
+    draw_dialogue.empty()
+
     with draw_dialogue.container():
-        st.write('"That\'s all the teams picked folks, thanks for having me.')
+        st.write('"That\'s all the teams picked folks, thanks for having me."')
+        sleep(5)
         st.write(f"No problem, {unc1["First Name"]}. You did fantastically.")
 
     st.write(f"Fairest teams generated. Team A score: {team_a_score:.2f}, Team B Score {team_b_score:.2f}.")
