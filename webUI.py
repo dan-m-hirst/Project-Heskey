@@ -151,6 +151,8 @@ if st.button("Begin the festivities"):
             '''"No but seriously, I\'m all good thanks, Mike. 
             Let\'s get on with it shall we?"'''
         )
+        sleep(3)
+        st.write(f"Please, f{unc1['First Name']}, start the draw!")
 
     #These cols are where the final team list will go
     col1, col2 = st.columns(2, width = col_width)
