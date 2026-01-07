@@ -7,7 +7,7 @@ core_folder = os.getcwd()
 sim_folder = os.path.join(core_folder, "Simulator Files")
 player_dialogue_file_path = os.path.join(sim_folder, "player_dialogue.csv")
 banter_file_path = os.path.join(sim_folder, "guest_dialogue.csv")
-banter_file = pd.read_csv(banter_file_path, header = None)
+banter_file = pd.read_csv(banter_file_path)
 
 gif_folder = os.path.join(sim_folder, "GIFs")
 
